@@ -13,17 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //add file  question routes
 require __DIR__ . "/question.php";
 //add file  answer routes
 require __DIR__ . "/answer.php";
+//add file  topic routes
+require __DIR__ . "/topic.php";
+//add file  victorina routes
+require __DIR__ . "/vict.php";
+//add file  page routes
+require __DIR__ . "/page.php";
 
 

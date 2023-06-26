@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}
+                <div class="card-header">{{ __('Answer') }}
                 <a href="{{ route('answer.index') }}">List</a>
                 </div>
                 <div class="card-body">

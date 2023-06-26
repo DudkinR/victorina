@@ -12,7 +12,7 @@ class Answer extends Model
     protected $table = 'answers';
 // columns
     protected $fillable = [
-        'content'
+        'content'  , 'user_id', 'permission'
     ];
 // bilongtomany questions
     public function questions()

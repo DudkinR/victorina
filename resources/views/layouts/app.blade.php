@@ -16,7 +16,8 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <!-- public\js\function_app.js  -->
- 
+      <script src="{{ asset('js/jquery.min.js') }}"></script>
+       <script src="{{ asset('js/ckeditor.js') }}"></script>
 
 </head>
 <body>
@@ -52,42 +53,74 @@
                                 </li>
                             @endif
                         @else
+                        <!-- li vectorins -->
+                        <li  class="nav-item dropdown">
+                            <a class="nav-link" href="{{ route('home') }}"
+                            role="button"
+                            id-="navbarDropdown0"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+
+
+
+                            >
+                            {{ __('Victorina') }}
+                            </a>
+                            <!-- type1 vectorina -->
+                            <div   class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('vict.index') }}?v=1">
+                                    {{ __('V1') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('vict.index') }}?v=2">
+                                       {{ __('V2') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('vict.index') }}?v=3">
+                                    {{ __('V3') }}
+                                </a>
+
+                                <a class="dropdown-item" href="{{ route('vict.index') }}?v=4">
+                                                                    {{ __('V4') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('vict.index') }}?v=5">
+                                                                    {{ __('V5') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('vict.index') }}?v=6">
+																																																																				                                {{ __('V6') }}
+                                </a>
+                            </div>
+                        </li>
+                           
                         <li
-class="nav-item dropdown"
->
-<a
-id="navbarDropdown"
-class="nav-link dropdown-toggle"
-href="#"
-role="button"
-data-bs-toggle="dropdown"
-aria-haspopup="true"
-aria-expanded="false"
-v-pre
->
-{{ __('Questions') }}
-</a>
-<div
-class="dropdown-menu dropdown-menu-end"
-aria-labelledby="navbarDropdown"
->
-<a
-class="dropdown-item"
-href="{{ route('question.index') }}"
->
-{{ __('List') }}
-</a>
-<a
-class="dropdown-item"
-href="{{ route('question.create') }}"
->
-{{ __('Create') }}
-</a>
-<a class="dropdown-item" href="{{ route('answer.index') }}">
-{{ __('List') }}
-</a>
-</div>
-</li>
+                            class="nav-item dropdown"
+                            >
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ __('Data') }}
+                            </a>
+                           
+                            <div
+                            class="dropdown-menu dropdown-menu-end"
+                            aria-labelledby="navbarDropdown"
+                            >
+                            <a
+                            class="dropdown-item"
+                            href="{{ route('question.index') }}"
+                            >
+                            {{ __('question') }}
+                            </a>
+                            <a
+                            class="dropdown-item"
+                            href="{{ route('topic.index') }}"
+                            >
+                            {{ __('topic') }}
+                            </a>
+                            <a class="dropdown-item" href="{{ route('answer.index') }}">
+                            {{ __('answer') }}
+                            </a>
+                            <a class="dropdown-item" href="{{ route('page.index') }}">
+                            {{ __('page') }}
+                            </a>
+                            </div>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -112,6 +145,17 @@ href="{{ route('question.create') }}"
         </nav>
 
         <main class="py-4">
+            <!-- errors block -->
+            @if ($errors->any())
+            <div class="alert alert-danger">
+            <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+            </div>
+            @endif
+            <!-- errors block -->
             @yield('content')
         </main>
     </div>

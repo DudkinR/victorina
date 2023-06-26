@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Answer;
+ use Illuminate\Support\Facades\Auth;
 
 class AnswerController extends Controller
 {
@@ -22,8 +23,8 @@ return view('answer.index', compact('answers'));
      */
     public function create()
     {
-        //
-return view('answer.create');
+        //         
+        return view('answer.create');
     }
 
     /**
@@ -31,11 +32,16 @@ return view('answer.create');
      */
     public function store(Request $request)
     {
-        //
-$answer = new Answer();
-$answer->content = $request->input('content');
-$answer->save();
-return redirect()->route('answer.index');
+        // 
+       if(trim($request->input('content'))==''){
+        $answer = new Answer();
+        $answer->content = $request->input('content');
+        $answer->user_id = Auth::id();
+        $answer->permission=1;
+        $answer->save();
+       }
+    return redirect()->route('answer.index');
+
     }
 
     /**

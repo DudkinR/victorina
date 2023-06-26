@@ -4,11 +4,24 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}
+                <div class="card-header">{{ __('Questions') }}
                 <a href="{{ route('question.index') }}">List</a>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('question.update',$question->id) }}" method="POST">
+                    <div class="form-group">
+                    <label for="topic">Topic</label>
+                    <!-- select topics [] -->
+                    <select multiple class="form-control" id="topic" name="topic[]">
+                    @foreach($topics as $topic)
+                    <option value="{{$topic->id}}"
+                    @if(in_array($topic->id,$question->topics->pluck('id')->toArray()))
+                         selected
+                    @endif
+                    >{{$topic->name}}</option>
+                    @endforeach
+                    </select>
+                    </div>
                     <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{$question->name}}" >

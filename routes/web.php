@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+  // view nextproject.blade.php
+Route::get('/nextproject', function () {
+    // new project
+
+    $nextproject = App\Models\Project::create([
+        'ip_address' => request()->ip(),
+    ]);
+    return view('upwork.nextproject',["nextproject"=>$nextproject]);
+});
+
 
 //add file  question routes
 require __DIR__ . "/question.php";
@@ -27,5 +37,9 @@ require __DIR__ . "/topic.php";
 require __DIR__ . "/vict.php";
 //add file  page routes
 require __DIR__ . "/page.php";
+//add file  game routes
+require __DIR__ . "/game.php";
+//add file  culc routes
+require __DIR__ . "/culc.php";
 
 

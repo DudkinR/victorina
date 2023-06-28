@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('game_topic', function (Blueprint $table) {
+             $table->id();
             $table->foreignId('topic_id')->constrained();
             $table->foreignId('game_id')->constrained();
         });
         Schema::create('game_page', function (Blueprint $table) {
+             $table->id();
             $table->foreignId('page_id')->constrained();
             $table->foreignId('game_id')->constrained();
         });

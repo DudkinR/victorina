@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Page;
+use App\Models\Game;
+use        App\Models\Topic;
 use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
@@ -25,7 +27,9 @@ class PageController extends Controller
     public function create()
     {
         //
-        return view('page.create');
+        $games=Game::all();
+        $topics=Topic::all();
+        return view('page.create',compact('games','topics'));
     }
 
     /**
@@ -48,6 +52,12 @@ class PageController extends Controller
         $page->is_published =  1;
         $page->published_at  = now();
         $page->save();
+        if(isset($request->games)){
+            $page->games()->attach($request->games);
+        }
+        if(isset($request->topics)){
+            $page->topics()->attach($request->topics);
+        }
         // redirect to show
          return    redirect()->route('page.show',$page->id);
     }
@@ -59,7 +69,9 @@ class PageController extends Controller
     {
         //
         $page=Page::findOrFail($id);
-        return view('page.show',compact('page'));
+         $games=Game::all();
+         $topics=Topic::all();
+        return view('page.show',compact('page','games','topics' ));
     }
 
     /**
@@ -68,8 +80,10 @@ class PageController extends Controller
     public function edit(string $id)
     {
         //
-$page=Page::findOrFail($id);
-return view('page.edit',compact('page'));
+        $page=Page::findOrFail($id);
+        $games=Game::all();
+        $topics    =Topic::all();
+        return view('page.edit',compact('page','games','topics'));
     }
 
     /**
@@ -89,7 +103,15 @@ return view('page.edit',compact('page'));
         $page->slug=$request->slug;
         $page->content=$request->content;
         $page->save();
-// redirect to show
+         $page->games()->detach();
+        if(isset($request->games)){
+            $page->games()->attach($request->games);
+        }
+        $page->topics()->detach();
+        if(isset($request->topics)){
+            $page->topics()->attach($request->topics);
+        }
+        // redirect to show
          return    redirect()->route('page.show',$page->id);
     }
 
@@ -100,6 +122,8 @@ return view('page.edit',compact('page'));
     {
         //
         $page=Page::findOrFail($id);
+        $page->games()->detach();
+        $page->topics()->detach();
         $page->delete();
         return redirect()->route('page.index');
     

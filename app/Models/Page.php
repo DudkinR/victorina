@@ -16,5 +16,12 @@ class Page extends Model
         'published_at',
         'user_id',
     ];
-
+    public function games()
+    {
+        return $this->belongsToMany(Game::class, 'game_page', 'page_id', 'game_id');
+    }
+   public function topics()
+    {
+        return $this->belongsToMany(Topic::class, 'page_topic', 'page_id', 'topic_id');
+    }
 }

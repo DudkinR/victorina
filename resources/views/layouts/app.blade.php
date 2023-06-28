@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'My project') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -118,6 +118,9 @@
                             </a>
                             <a class="dropdown-item" href="{{ route('page.index') }}">
                             {{ __('page') }}
+                            </a>
+                            <a class="dropdown-item" href="{{ route('game.index') }}">
+	    					{{ __('game') }}
                             </a>
                             </div>
                             </li>

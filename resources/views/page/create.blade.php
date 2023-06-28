@@ -21,6 +21,27 @@
                     <label for="content">Content</label>
                     <textarea class="form-control ckeditor" id="content" name="content" rows="3"></textarea>
                     </div>
+                     <div class="form-group">
+                    <label for="games">Games</label>
+                    <!-- select answers [] -->
+                    <select multiple class="form-control" id="games" name="games[]">
+                    @foreach($games as $game)
+                    <option value="{{$game->id}}"
+                     >{{$game->name}}</option>
+                    @endforeach
+                    </select>
+                    </div>
+                    <div   class="form-group">
+                    <label for="topics">Topics</label>
+                    <!-- select answers [] -->
+                    <select multiple class="form-control" id="topics" name="topics[]">
+                    @foreach($topics as $topic)
+                    <option value="{{$topic->id}}"
+                        >{{$topic->name}}</option>
+                    @endforeach
+                    </select>
+                    </div>
+
                     @csrf
                     <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
